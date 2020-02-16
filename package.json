@@ -1,0 +1,28 @@
+{
+  "name": "rov-controller",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "lint": "eslint \"**/*.js\"",
+    "start": "electron src/",
+    "test": "npm run test:coverage && npm run lint",
+    "test:coverage": "nyc --reporter=lcov mocha && nyc report",
+    "test:dev": "mocha ./test --watch"
+  },
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^8.0.1",
+    "html5-gamepad": "^1.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^5.3.0",
+    "mocha": "^5.2.0",
+    "nyc": "^15.0.0"
+  }
+}
