@@ -15,6 +15,7 @@ test:
     expire_in: 1 week
 
 pages:
+  when: manual
   stage: deploy
   dependencies:
     - test
