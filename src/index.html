@@ -14,18 +14,6 @@
     <div name="gamepadEvents"></div>
   </body>
   <script>
-    const gamepadController = require('./game-controller.js');
-    gamepadController(window);
-
-    const display = document.querySelector('div[name="gamepadEvents"]');
-
-
-    this.addEventListener('gamepadButton', e => {
-      display.innerText = JSON.stringify(e.detail);
-    });
-
-    this.addEventListener('gamepadAxis', e => {
-      display.innerText = JSON.stringify(e.detail);
-    });
+    require('./initialize')(window);
   </script>
 </html>

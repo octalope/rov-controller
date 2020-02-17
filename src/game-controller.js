@@ -1,6 +1,9 @@
+const EventEmitter = require('events');
+
 module.exports = (window) => {
   const haveEvents = 'ongamepadconnected' in window;
   const gamepadStates = {};
+  const eventEmitter = new EventEmitter();
 
   const connecthandler = (e) => {
     addGamepad(e.gamepad);
@@ -80,29 +83,21 @@ module.exports = (window) => {
       });
 
       buttonChangeIndices.forEach(index => {
-        // eslint-disable-next-line no-undef
-        window.dispatchEvent(new CustomEvent('gamepadButton',
-          {
-            detail: {
-              controller: i,
-              button: index,
-              state: newState.buttons[index]
-            }
-          }
-        ));
+        const data = {
+          controller: i,
+          button: index,
+          state: newState.buttons[index]
+        };
+        eventEmitter.emit('gamepadButton', data);
       });
 
       axisChangeIndices.forEach(index => {
-        // eslint-disable-next-line no-undef
-        window.dispatchEvent(new CustomEvent('gamepadAxis',
-          {
-            detail: {
-              controller: i,
-              axis: index,
-              state: newState.axes[index]
-            }
-          }
-        ));
+        const data = {
+          controller: i,
+          axis: index,
+          state: newState.axes[index]
+        };
+        eventEmitter.emit('gamepadAxis', data);
       });
     }
   };
@@ -140,4 +135,8 @@ module.exports = (window) => {
   };
 
   initialize();
+
+  return {
+    on: (name, callback) => (eventEmitter.on(name, callback))
+  };
 };
