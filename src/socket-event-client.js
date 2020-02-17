@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const Socket = require('socket.io-client');
 const os = require('os');
 
